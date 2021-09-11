@@ -1,1 +1,1 @@
-Homework for 2 QA.GURU lesson
+Homeworks for QA.GURU
