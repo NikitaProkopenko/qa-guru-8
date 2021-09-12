@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -29,6 +30,7 @@ public class HomeWorkTests {
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue(userNumber);
         $("#dateOfBirthInput").click();
+        $("#subjectsInput").setValue("Maths").pressEnter();
         $(".react-datepicker__month-select").selectOption("March");
         $(".react-datepicker__year-select").selectOption("1992");
         $(".react-datepicker__day--001:not(.react-datepicker__day--outside-month)").click();
@@ -42,16 +44,15 @@ public class HomeWorkTests {
         $("#submit").scrollTo().click();
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(
-                text("Ivan Ivanov"),
-                text("ivan@test.com"),
-                text("Male"),
-                text("8900111111"),
-                text("01 March,1992"),
-                //text("Sport"),
-                text("Music"),
-                text("image.png"),
-                text("Test address"),
-                text("NCR Delhi"));
+        $(".table-responsive").$(byText("Student Name")).sibling(0).shouldHave(matchText(firstName + " " + lastName));
+        $(".table-responsive").$(byText("Student Email")).sibling(0).shouldHave(matchText(userEmail));
+        $(".table-responsive").$(byText("Gender")).sibling(0).shouldHave(matchText("Male"));
+        $(".table-responsive").$(byText("Mobile")).sibling(0).shouldHave(matchText(userNumber));
+        $(".table-responsive").$(byText("Date of Birth")).sibling(0).shouldHave(matchText("01 March,1992"));
+        $(".table-responsive").$(byText("Subjects")).sibling(0).shouldHave(matchText("Maths"));
+        $(".table-responsive").$(byText("Hobbies")).sibling(0).shouldHave(matchText("Music"));
+        $(".table-responsive").$(byText("Picture")).sibling(0).shouldHave(matchText("image.png"));
+        $(".table-responsive").$(byText("Address")).sibling(0).shouldHave(matchText("Test address"));
+        $(".table-responsive").$(byText("State and City")).sibling(0).shouldHave(matchText("NCR Delhi"));
     }
 }
