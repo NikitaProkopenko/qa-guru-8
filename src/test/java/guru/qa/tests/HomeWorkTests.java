@@ -12,13 +12,13 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class HomeWorkTests {
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         Configuration.startMaximized = true;
         open("https://demoqa.com/automation-practice-form");
     }
 
     @Test
-    void submitFormTest(){
+    void submitFormTest() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String userNumber = "8900111111";
