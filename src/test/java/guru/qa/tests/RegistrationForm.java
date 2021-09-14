@@ -1,21 +1,20 @@
 package guru.qa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
+import pages.components.CalendarComponent;
+import pages.components.GenderCheckboxComponent;
 
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
-public class HomeWorkTests {
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.startMaximized = true;
-        open("https://demoqa.com/automation-practice-form");
-    }
+public class RegistrationForm extends TestBase {
+
+    RegistrationPage registrationPage = new RegistrationPage();
+    GenderCheckboxComponent genderCheckboxComponent = new GenderCheckboxComponent();
+    CalendarComponent calendarComponent = new CalendarComponent();
 
     @Test
     void submitFormTest() {
@@ -24,16 +23,15 @@ public class HomeWorkTests {
         String userNumber = "8900111111";
         String userEmail = "ivan@test.com";
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue(userNumber);
-        $("#dateOfBirthInput").click();
+        registrationPage.openPage();
+        registrationPage.typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeUserEmail(userEmail);
+        genderCheckboxComponent.chooseGender("Male");
+        registrationPage.typeUserNumber(userNumber);
+        calendarComponent.setDate("March", "1992", "01");
+
         $("#subjectsInput").setValue("Maths").pressEnter();
-        $(".react-datepicker__month-select").selectOption("March");
-        $(".react-datepicker__year-select").selectOption("1992");
-        $(".react-datepicker__day--001:not(.react-datepicker__day--outside-month)").click();
         $("#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("img/image.png");
         $("#currentAddress").setValue("Test address");
