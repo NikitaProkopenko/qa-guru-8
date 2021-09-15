@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CalendarComponent {
     public void setDate(String month, String year, String day) {
-        String daySelector = "react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)";
+        String daySelector = ".react-datepicker__day--0%s:not(.react-datepicker__day--outside-month)";
         String formatedDaySelector = String.format(daySelector, day);
 
         $("#dateOfBirthInput").click();
