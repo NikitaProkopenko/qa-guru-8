@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="qa-guru-8.main" target="1.8" />
       <module name="qa-guru-8.test" target="1.8" />
+      <module name="qa-guru-81.main" target="1.8" />
+      <module name="qa-guru-81.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

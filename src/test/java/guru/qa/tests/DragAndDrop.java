@@ -17,6 +17,7 @@ public class DragAndDrop {
     @Test
     void checkDragAndDrop() {
         open("https://the-internet.herokuapp.com/drag_and_drop");
+        $(".example").shouldHave(text("Drag and Drop"));
         $("#column-a").dragAndDropTo($("#column-b"));
         $("#column-a").shouldHave(text("B"));
     }
